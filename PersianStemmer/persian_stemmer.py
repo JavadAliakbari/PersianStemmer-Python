@@ -294,8 +294,8 @@ class PersianStemmer(object):
                 if result:
                     sWord = sTemp
 
-        #	# دیندار
-        #	# دین دار
+        # # دیندار
+        # # دین دار
         if sWord not in PersianStemmer.suffix_exception:
             sSuffix = self.getSuffix(sWord)
             if (sSuffix):
@@ -478,7 +478,10 @@ class PersianStemmer(object):
             return s
 
         stemList = []
-        terminate = self.PatternMatching(input, stemList)
+        terminate = False
+        if input not in PersianStemmer.suffix_exception \
+                and input not in PersianStemmer.prefix_exception:
+            terminate = self.PatternMatching(input, stemList)
 
         if self.enableVerb:
             s = self.getVerb(input)
